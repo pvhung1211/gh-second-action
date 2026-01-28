@@ -1,0 +1,8 @@
+name: log-github-object
+on: push
+jobs:
+  log-github-object:
+    runs-on: ubuntu-latest
+    steps:
+      - name: log
+        run: echo "${{toJson(github)}}"
