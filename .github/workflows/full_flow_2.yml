@@ -29,4 +29,4 @@ jobs:
       - name: build
         run: npm run build
       - name: deploy
-        run: echo "deploying..."
+        run: echo ${{toJson(github.event)}}
