@@ -5,7 +5,7 @@ on:
       - dev
       - main
     paths:
-      - '/src/components/*'
+      - 'src/components/**'
 jobs:
   test:
     runs-on: ubuntu-latest
