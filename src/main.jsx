@@ -8,6 +8,7 @@ import './index.css';
 
 // Another comment
 // Yet another comment
+// Final comment
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
