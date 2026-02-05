@@ -1,5 +1,8 @@
 name: log-github-object
-on: push
+on:
+  pull_request:
+    types: 
+      - closed
 jobs:
   log-github-object:
     runs-on: ubuntu-latest
