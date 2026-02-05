@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - dev
+    paths:
+      - '/src/components/**'
 jobs:
   test:
     runs-on: ubuntu-latest
