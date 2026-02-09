@@ -19,11 +19,18 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install deps
         run: npm ci
+      - name: Run test
+        run: npm run test
+      - name: Build code
+        run: npm run build
       - name: get output
         id: output
         run: find dist/assets/**.js -type f -execdir echo 'test={}' >> $GITHUB_OUTPUT ';'
-      - name: Run test
-        run: npm run test
+      - name: upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -41,9 +48,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install deps
         run: npm ci
-      - name: Build code
-        run: npm run build
+      - name: Get build
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
       - name: Get output
         run: echo 'output here ${{ needs.test.outputs.test }}'
       - name: Deploy
-        run: echo "deploying..."
+        run: echo "deploying..." |
+            ls
