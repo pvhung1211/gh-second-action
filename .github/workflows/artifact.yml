@@ -1,7 +1,7 @@
 name: artifact
 on: workflow_dispatch
 jobs:
-  download:
+  upload:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -21,3 +21,14 @@ jobs:
           path: dist
       - name: log
         run: ls dist
+  download:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: dist
+          path: my-custom-folder-for-artifacts
+      - name: log
+        run: ls my-custom-folder-for-artifacts
